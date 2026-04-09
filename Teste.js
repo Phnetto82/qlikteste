@@ -1,41 +1,48 @@
 /*
- * Basic responsive mashup template
- * @owner Enter you name here (xxx)
+ * Vendas Digitais v2 — Mashup Lojas Guaibim
  */
-/*
- *    Fill in host and port for Qlik engine
- */
-var prefix = window.location.pathname.substr( 0, window.location.pathname.toLowerCase().lastIndexOf( "/extensions" ) + 1 );
 var config = {
-	  host: 'itprime1.us.qlikcloud.com',
+    host: 'itprime1.us.qlikcloud.com',
     prefix: '/',
     port: 443,
     isSecure: true,
     webIntegrationId: 'c-VhSZRiU4yEjR-fBb_WELv6p2Z8cE7M'
-
 };
-require.config( {
-	baseUrl: ( config.isSecure ? "https://" : "http://" ) + config.host + (config.port ? ":" + config.port : "") + config.prefix + "resources"
-} );
-
-require( ["js/qlik"], function ( qlik ) {
-	qlik.on( "error", function ( error ) {
-		$( '#popupText' ).append( error.message + "<br>" );
-		$( '#popup' ).fadeIn( 1000 );
-	} );
-	$( "#closePopup" ).click( function () {
-		$( '#popup' ).hide();
-	} );
-
-	//callbacks -- inserted here --
-	//open apps -- inserted here --
-	var app = qlik.openApp( '9e8c9ec2-fca4-4a81-bb27-10e2eae77cd8', config );
-	//get objects -- inserted here --
-	
-	app.visualization.get('GumJRHj').then(function(vis){
-    	vis.show("QV01");	
-	} );
-	
-	//create cubes and lists -- inserted here --
-
-} );
+ 
+require.config({
+    baseUrl: (config.isSecure ? "https://" : "http://") + config.host +
+             (config.port ? ":" + config.port : "") + config.prefix + "resources"
+});
+ 
+require(["js/qlik"], function(qlik) {
+ 
+    qlik.on("error", function(error) {
+        document.getElementById('popupText').innerHTML += error.message + "<br>";
+        document.getElementById('popup').style.display = 'block';
+    });
+ 
+    document.getElementById("closePopup").onclick = function() {
+        document.getElementById('popup').style.display = 'none';
+    };
+ 
+    var app = qlik.openApp('9e8c9ec2-fca4-4a81-bb27-10e2eae77cd8', config);
+ 
+    // KPI — Vendas e Margem
+    app.visualization.get('CafYhC').then(function(vis) { vis.show("QV01"); });
+ 
+    // KPI — Indicadores secundários
+    app.visualization.get('fJyTk').then(function(vis) { vis.show("QV02"); });
+ 
+    // Barchart — Vendas por Linha
+    app.visualization.get('Lzvxpm').then(function(vis) { vis.show("QV03"); });
+ 
+    // Linechart — Evolução Mensal
+    app.visualization.get('GumJRHj').then(function(vis) { vis.show("QV04"); });
+ 
+    // Piechart — Distribuição por Canal
+    app.visualization.get('WmRKX').then(function(vis) { vis.show("QV05"); });
+ 
+    // Linechart — Tendência
+    app.visualization.get('bATEtJM').then(function(vis) { vis.show("QV06"); });
+ 
+});
