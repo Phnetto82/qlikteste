@@ -11,7 +11,7 @@ var config = {
     prefix: '/',
     port: 443,
     isSecure: true,
-    webIntegrationId = 'c-VhSZRiU4yEjR-fBb_WELv6p2Z8cE7M'
+    webIntegrationId: 'c-VhSZRiU4yEjR-fBb_WELv6p2Z8cE7M'
 
 };
 require.config( {
@@ -29,7 +29,7 @@ require( ["js/qlik"], function ( qlik ) {
 
 	//callbacks -- inserted here --
 	//open apps -- inserted here --
-	var app = qlik.openApp( 'AppId', config );
+	var app = qlik.openApp( '9e8c9ec2-fca4-4a81-bb27-10e2eae77cd8', config );
 	//get objects -- inserted here --
 	
 	app.visualization.get('GumJRHj').then(function(vis){
