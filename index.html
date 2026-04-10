@@ -5,251 +5,484 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Vendas Digitais v2 | Lojas Guaibim</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--G:#2E8B1E;--G2:#236A16;--G3:#3DAA2A;--Y:#F5C800;--Bg:#F5F7F4;--Sf:#fff;--Ln:#E8E8E8}
-html,body{min-height:100%;font-family:'Montserrat',-apple-system,sans-serif;background:var(--Bg)}
-
-/* TOPBAR */
-#tb{background:linear-gradient(135deg,var(--G2) 0%,var(--G) 60%,var(--G3) 100%);height:60px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 3px 14px rgba(35,106,22,.45);position:sticky;top:0;z-index:200}
+:root{--G:#2E8B1E;--G2:#236A16;--G3:#3DAA2A;--Glt:#EAF5E7;--Gmd:#C2E3BB;--Y:#F5C800;--Ylt:#FFFBE6;--Ydk:#B89400;--B:#1A6FD4;--Dk:#1A1A1A;--Dk2:#2A2A2A;--Mid:#555;--Mut:#888;--Ln:#E8E8E8;--Bg:#F5F7F4;--Sf:#fff;--r:8px;--F:'Montserrat',-apple-system,sans-serif}
+html,body{min-height:100%;font-family:var(--F);background:var(--Bg);color:var(--Dk);font-size:14px}
+#tb{background:linear-gradient(135deg,var(--G2) 0%,var(--G) 60%,var(--G3) 100%);padding:0 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;min-height:60px;box-shadow:0 3px 12px rgba(35,106,22,.4)}
 .tl{display:flex;align-items:center;gap:12px}
-.lb{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:9px;padding:5px 13px;display:flex;flex-direction:column;align-items:center}
-.ln{font-size:17px;font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1;text-transform:uppercase}
-.ln span{color:var(--Y)}
+.lb{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:9px;padding:5px 12px;display:flex;flex-direction:column;align-items:center}
+.ln{font-size:17px;font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1;text-transform:uppercase}.ln span{color:var(--Y)}
 .ls{font-size:7px;color:rgba(255,255,255,.75);font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-top:1px}
 .dv{width:1.5px;height:32px;background:rgba(255,255,255,.25);margin:0 8px}
-.at{font-size:14px;font-weight:800;color:#fff}
-.at em{font-style:normal;font-size:11px;font-weight:600;color:var(--Y);margin-left:4px}
+.at{font-size:14px;font-weight:800;color:#fff}.at em{font-style:normal;font-size:11px;font-weight:600;color:var(--Y);margin-left:4px}
 .as{font-size:9px;color:rgba(255,255,255,.6);font-weight:600;margin-top:2px}
-.pq{font-size:11px;font-weight:800;color:var(--G2);background:var(--Y);border-radius:20px;padding:6px 14px;text-decoration:none;transition:background .15s}
-.pq:hover{background:#ffe033}
-
-/* NAV */
-#nv{background:#2A2A2A;padding:0 24px;display:flex;overflow-x:auto;border-bottom:3px solid var(--Y);position:sticky;top:60px;z-index:100}
+.tr{display:flex;align-items:center;gap:8px}
+.pq{font-size:11px;font-weight:800;color:var(--G2);background:var(--Y);border-radius:20px;padding:6px 14px;text-decoration:none;transition:background .15s}.pq:hover{background:#ffe033}
+#fb{background:var(--Dk2);padding:9px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:3px solid var(--Y);position:sticky;top:60px;z-index:200}
+.fbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.fbs{font-family:var(--F);font-size:11px;font-weight:600;color:#fff;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 14px;cursor:pointer;outline:none;-webkit-appearance:none;appearance:none;min-width:120px;transition:all .15s}
+.fbs:hover,.fbs:focus{background:rgba(255,255,255,.18);border-color:var(--Y)}
+.fbs option{background:var(--Dk2);color:#fff}
+.fbc{font-family:var(--F);font-size:11px;font-weight:700;color:var(--Y);background:transparent;border:1.5px solid var(--Y);border-radius:20px;padding:4px 12px;cursor:pointer;transition:all .15s}.fbc:hover{background:var(--Y);color:var(--Dk2)}
+#fst{display:flex;align-items:center;gap:6px;margin-left:auto;font-size:11px;font-weight:600;color:rgba(255,255,255,.45)}
+.cd{width:8px;height:8px;border-radius:50%;background:#555;flex-shrink:0;transition:background .3s}
+.cd.ok{background:#4CAF50}.cd.er{background:#F44336}.cd.ld{background:var(--Y);animation:pu .7s infinite alternate}
+@keyframes pu{to{opacity:.25}}
+#nv{background:var(--Dk2);padding:0 24px;display:flex;overflow-x:auto;border-bottom:3.5px solid var(--Y);position:sticky;top:101px;z-index:100}
 #nv::-webkit-scrollbar{display:none}
-.tab{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);padding:0 14px;height:40px;display:flex;align-items:center;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .15s;user-select:none;text-transform:uppercase;letter-spacing:.05em;margin-bottom:-3px}
-.tab.on{color:var(--Y);border-bottom-color:var(--Y)}
-.tab:hover:not(.on){color:rgba(255,255,255,.8)}
-
-/* CONTENT */
-.wrap{padding:20px 24px;max-width:1440px;margin:0 auto}
-.pg{display:none}.pg.on{display:block}
-
-/* GRID LAYOUTS */
-.kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px}
-.grid-full{margin-bottom:14px}
-@media(max-width:900px){.kpi-row,.grid-2,.grid-3{grid-template-columns:1fr}}
-
-/* CARDS */
-.card{background:var(--Sf);border:1.5px solid var(--Ln);border-radius:10px;overflow:hidden;position:relative}
-.card.ac{border-top:4px solid var(--G)}
-.card.ay{border-top:4px solid var(--Y)}
-.card-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.06em;padding:10px 14px 0}
-
-/* IFRAMES */
-.qlik-frame{width:100%;border:none;display:block;background:var(--Bg)}
-.qlik-frame.kpi{height:130px}
-.qlik-frame.chart{height:280px}
-.qlik-frame.chart-lg{height:340px}
-.qlik-frame.chart-map{height:380px}
-
-/* FILTER BAR */
-.filter-bar{background:#2A2A2A;border-radius:10px;padding:12px 16px;margin-bottom:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.filter-bar .qlik-frame{height:44px;border-radius:6px;overflow:hidden}
-@media(max-width:900px){.filter-bar{grid-template-columns:repeat(2,1fr)}}
-
-/* SECTION LABEL */
-.slabel{font-size:10px;font-weight:700;color:var(--G);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--G);display:inline-block}
-
-/* PLACEHOLDER */
-.ph{padding:60px 40px;text-align:center;background:var(--Sf);border:1.5px solid var(--Ln);border-radius:10px}
-.phi{font-size:40px;margin-bottom:14px}
-.ph h3{font-size:16px;font-weight:800;color:#1a1a1a;margin-bottom:8px}
-.ph a{display:inline-block;margin-top:16px;background:var(--G);color:#fff;text-decoration:none;font-weight:800;padding:10px 22px;border-radius:6px;font-size:13px}
-
-footer{text-align:center;padding:20px;font-size:11px;color:#aaa;border-top:1.5px solid var(--Ln);margin-top:16px;font-weight:600}
-footer b{color:var(--G)}
+.tab{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);padding:0 14px;height:40px;display:flex;align-items:center;cursor:pointer;border-bottom:3.5px solid transparent;white-space:nowrap;transition:all .15s;user-select:none;text-transform:uppercase;letter-spacing:.05em;margin-bottom:-3.5px}
+.tab.on{color:var(--Y);border-bottom-color:var(--Y)}.tab:hover:not(.on){color:rgba(255,255,255,.8)}
+.wr{padding:20px 24px;display:grid;gap:16px;max-width:1440px;margin:0 auto}
+.pg{display:none}.pg.on{display:contents}
+.kr{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:1100px){.kr{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){.kr{grid-template-columns:repeat(2,1fr)}}
+.ki{background:var(--Sf);border:1.5px solid var(--Ln);border-radius:var(--r);padding:16px 18px;position:relative;overflow:hidden;transition:box-shadow .2s,transform .15s}
+.ki:hover{box-shadow:0 6px 24px rgba(0,0,0,.1);transform:translateY(-2px)}
+.ks{position:absolute;top:0;left:0;right:0;height:5px}
+.ki.kg .ks{background:var(--G)}.ki.ky .ks{background:var(--Y)}.ki.kd .ks{background:var(--Dk2)}.ki.kb .ks{background:var(--B)}
+.kl{font-size:10px;font-weight:700;color:var(--Mut);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.kv{font-size:24px;font-weight:900;line-height:1;color:var(--Dk);letter-spacing:-.02em;min-height:28px;transition:all .3s}
+.kv.sk{color:transparent;background:var(--Ln);border-radius:4px;animation:sh 1.2s infinite}
+.bd{display:inline-flex;align-items:center;font-size:11px;margin-top:8px;padding:3px 9px;border-radius:20px;font-weight:700}
+.bG{background:var(--Glt);color:var(--G2)}.bY{background:var(--Ylt);color:var(--Ydk)}.bR{background:#FFF0F0;color:#B00}.bN{background:var(--Bg);color:var(--Mid)}
+@keyframes sh{0%,100%{opacity:.3}50%{opacity:.7}}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:1050px){.g3,.g2{grid-template-columns:1fr}}
+.ca{background:var(--Sf);border:1.5px solid var(--Ln);border-radius:var(--r);padding:18px 20px}
+.ca.ac{border-top:4px solid var(--G)}.ca.ay{border-top:4px solid var(--Y)}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px}
+.ct{font-size:13px;font-weight:700;color:var(--Dk)}
+.tg{font-size:10px;color:var(--G2);background:var(--Glt);border-radius:20px;padding:3px 10px;white-space:nowrap;font-weight:700;letter-spacing:.03em;text-transform:uppercase;border:1.5px solid var(--Gmd)}
+.cw{position:relative;width:100%;display:block}
+.cw canvas{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
+.cw.sk::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--Ln) 25%,#f0f0f0 50%,var(--Ln) 75%);background-size:200% 100%;animation:sk2 1.4s infinite;border-radius:4px}
+@keyframes sk2{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.sl{display:flex;align-items:center;gap:12px;font-size:11px;color:var(--Mut);font-weight:600;margin-bottom:10px;flex-wrap:wrap}
+.sl span{display:flex;align-items:center;gap:4px}
+.ld2{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.mk{width:100%;border-collapse:collapse}
+.mk th{font-size:10px;color:var(--Mut);font-weight:700;text-align:left;padding:0 0 8px;border-bottom:2.5px solid var(--G);text-transform:uppercase;letter-spacing:.06em}
+.mk th:not(:first-child){text-align:right}
+.mk td{font-size:12px;padding:9px 0;border-bottom:1px solid var(--Ln);vertical-align:middle;font-weight:500}
+.mk td:not(:first-child){text-align:right;color:var(--Mid)}
+.mk tr:last-child td{border-bottom:none}.mk tr:hover td{background:var(--Glt)}
+.mi{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:7px;margin-right:7px;font-size:10px;font-weight:800;color:#fff;vertical-align:middle;flex-shrink:0}
+.pt{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:700}
+.pG{background:var(--Glt);color:var(--G2)}.pY{background:var(--Ylt);color:var(--Ydk)}.pN{background:var(--Bg);color:var(--Mut)}
+.ri{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--Ln)}.ri:last-child{border-bottom:none}
+.rn{font-size:12px;flex:0 0 110px;font-weight:700}
+.rb{flex:1;height:6px;background:var(--Ln);border-radius:3px;overflow:hidden}
+.rbf{height:100%;border-radius:3px;transition:width .5s ease}
+.rv{font-size:12px;color:var(--Mut);min-width:60px;text-align:right;font-weight:700}
+.ph{padding:60px 40px;text-align:center;background:var(--Sf);border:1.5px solid var(--Ln);border-radius:var(--r)}
+.phi{font-size:40px;margin-bottom:14px}.ph h3{font-size:16px;font-weight:800;color:var(--Dk);margin-bottom:8px}.ph p{font-size:13px;line-height:1.7;color:var(--Mut)}
+.ph a,.btn{display:inline-block;margin-top:16px;background:var(--G);color:#fff;text-decoration:none;font-weight:800;padding:10px 22px;border-radius:6px;font-size:13px;transition:background .15s}
+.ph a:hover,.btn:hover{background:var(--G2)}
+#tip{position:fixed;pointer-events:none;z-index:9999;background:var(--Dk);color:#fff;border-radius:8px;padding:9px 13px;font-size:12px;line-height:1.65;display:none;max-width:240px;font-family:var(--F);font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.4);border-left:4px solid var(--Y)}
+footer{text-align:center;padding:20px;font-size:11px;color:var(--Mut);border-top:2px solid var(--Ln);margin-top:8px;font-weight:600}footer b{color:var(--G)}
 </style>
 </head>
 <body>
-
-<!-- TOPBAR -->
 <div id="tb">
   <div class="tl">
-    <div class="lb">
-      <div class="ln">GUA<span>I</span>BIM</div>
-      <div class="ls">Do jeito que a Bahia gosta</div>
-    </div>
+    <div class="lb"><div class="ln">GUA<span>I</span>BIM</div><div class="ls">Do jeito que a Bahia gosta</div></div>
     <div class="dv"></div>
-    <div>
-      <div class="at">Vendas Digitais <em>v2</em></div>
-      <div class="as">Dados ao vivo · Qlik Cloud</div>
-    </div>
+    <div><div class="at">Vendas Digitais <em>v2</em></div><div class="as" id="as-sub">Dados ao vivo · Qlik Cloud</div></div>
   </div>
   <a class="pq" href="https://itprime1.us.qlikcloud.com/sense/app/9e8c9ec2-fca4-4a81-bb27-10e2eae77cd8" target="_blank">&#8599; Abrir no Qlik</a>
 </div>
-
-<!-- NAV -->
+<div id="fb">
+  <span class="fbl">Filtrar</span>
+  <select class="fbs" id="f-ano"    onchange="applyFilter('ANO',this)"><option value="">Todos os anos</option></select>
+  <select class="fbs" id="f-mk"     onchange="applyFilter('Vendedor.MARKETPLACE',this)"><option value="">Todos os canais</option></select>
+  <select class="fbs" id="f-linha"  onchange="applyFilter('Produto.LINHA',this)"><option value="">Todas as linhas</option></select>
+  <select class="fbs" id="f-regiao" onchange="applyFilter('Estado.REGIAO',this)"><option value="">Todas as regiões</option></select>
+  <button class="fbc" onclick="clearFilters()">&#10005; Limpar</button>
+  <div id="fst"><div class="cd ok" id="cdot"></div><span id="clbl">Dados ao vivo</span></div>
+</div>
 <div id="nv">
   <div class="tab on" data-p="db">Dashboard</div>
   <div class="tab" data-p="mk">Marketplaces</div>
   <div class="tab" data-p="pr">Produtos</div>
-  <div class="tab" data-p="lo">Lojas</div>
   <div class="tab" data-p="re">Regiões</div>
-  <div class="tab" data-p="es">Estoque</div>
-  <div class="tab" data-p="pe">Pedidos</div>
-  <div class="tab" data-p="qd">Quadro Din.</div>
 </div>
-
-<div class="wrap">
-
-<!-- BASE URL para os single objects -->
-<script>
-var BASE = 'https://itprime1.us.qlikcloud.com/single/?appid=9e8c9ec2-fca4-4a81-bb27-10e2eae77cd8';
-var OPT  = '&opt=ctxmenu,toolbar&theme=horizon&select=clearall';
-
-function qurl(objId){ return BASE + '&obj=' + objId + OPT; }
-function sheetUrl(sheetId){ return 'https://itprime1.us.qlikcloud.com/single/?appid=9e8c9ec2-fca4-4a81-bb27-10e2eae77cd8&sheet=' + sheetId + OPT; }
-
-// Injeta src nos iframes só ao mostrar a aba (lazy load)
-function loadTab(tabId){
-  document.querySelectorAll('#p-'+tabId+' iframe[data-src]').forEach(function(f){
-    f.src = f.dataset.src;
-    delete f.dataset.src;
-  });
-}
-</script>
-
-<!-- ═══ DASHBOARD ═══ -->
+<div class="wr">
 <div class="pg on" id="p-db">
-
-  <!-- FILTROS -->
-  <div class="slabel">Filtros</div>
-  <div class="filter-bar">
-    <iframe class="qlik-frame" data-src="" id="f-ano"   style="height:44px"></iframe>
-    <iframe class="qlik-frame" data-src="" id="f-mes"   style="height:44px"></iframe>
-    <iframe class="qlik-frame" data-src="" id="f-mk"    style="height:44px"></iframe>
-    <iframe class="qlik-frame" data-src="" id="f-linha" style="height:44px"></iframe>
+  <div class="kr">
+    <div class="ki kg"><div class="ks"></div><div class="kl">Vendas totais</div><div class="kv sk" id="kv0">—</div><div class="bd bG" id="kb0">&nbsp;</div></div>
+    <div class="ki kg"><div class="ks"></div><div class="kl">Venda líquida</div><div class="kv sk" id="kv1">—</div><div class="bd bN" id="kb1">&nbsp;</div></div>
+    <div class="ki ky"><div class="ks"></div><div class="kl">Margem média</div><div class="kv sk" id="kv2">—</div><div class="bd bY">&nbsp;</div></div>
+    <div class="ki kd"><div class="ks"></div><div class="kl">Devoluções</div><div class="kv sk" id="kv3">—</div><div class="bd bR">&nbsp;</div></div>
+    <div class="ki kb"><div class="ks"></div><div class="kl">Ticket médio</div><div class="kv sk" id="kv4">—</div><div class="bd bN">&nbsp;</div></div>
   </div>
-
-  <!-- KPIs -->
-  <div class="slabel">KPIs</div>
-  <div class="kpi-row">
-    <div class="card ac">
-      <div class="card-title">Vendas e Indicadores</div>
-      <iframe class="qlik-frame kpi" data-src="" id="obj-CafYhC"></iframe>
-    </div>
-    <div class="card ac">
-      <div class="card-title">Margem e Devoluções</div>
-      <iframe class="qlik-frame kpi" data-src="" id="obj-fJyTk"></iframe>
-    </div>
+  <div class="ca ac">
+    <div class="ch"><span class="ct">Evolução anual · Vendas, Líquida e Margem</span><span class="tg">por ano</span></div>
+    <div class="sl"><span><span class="ld2" style="background:var(--G)"></span>Vendas</span><span><span class="ld2" style="background:var(--B)"></span>Líquida</span><span><span class="ld2" style="background:var(--Y);border-radius:50%"></span>Margem %</span></div>
+    <div class="cw sk" style="height:300px" id="wc1"><canvas id="c1"></canvas></div>
   </div>
-
-  <!-- GRÁFICOS -->
-  <div class="slabel">Análise de Vendas</div>
-  <div class="grid-2">
-    <div class="card ac">
-      <div class="card-title">Evolução Mensal</div>
-      <iframe class="qlik-frame chart" data-src="" id="obj-GumJRHj"></iframe>
-    </div>
-    <div class="card ac">
-      <div class="card-title">Tendência</div>
-      <iframe class="qlik-frame chart" data-src="" id="obj-bATEtJM"></iframe>
-    </div>
+  <div class="ca">
+    <div class="ch"><span class="ct">Sazonalidade mensal</span><span class="tg">Vendas R$M</span></div>
+    <div class="cw sk" style="height:220px" id="wc2"><canvas id="c2"></canvas></div>
   </div>
-  <div class="grid-2">
-    <div class="card ay">
-      <div class="card-title">Vendas por Linha</div>
-      <iframe class="qlik-frame chart-lg" data-src="" id="obj-Lzvxpm"></iframe>
-    </div>
-    <div class="card ay">
-      <div class="card-title">Distribuição por Canal</div>
-      <iframe class="qlik-frame chart" data-src="" id="obj-WmRKX"></iframe>
-    </div>
+  <div class="g3">
+    <div class="ca"><div class="ch"><span class="ct">Canais de venda</span><span class="tg">top 8</span></div><table class="mk"><thead><tr><th>Canal</th><th>Vendas</th><th>Margem</th><th>Dev.</th></tr></thead><tbody id="tb0"></tbody></table></div>
+    <div class="ca"><div class="ch"><span class="ct">Distribuição regional</span><span class="tg">%</span></div><div class="cw sk" style="height:165px;margin-bottom:10px" id="wc3"><canvas id="c3"></canvas></div><div id="rl0"></div></div>
+    <div class="ca"><div class="ch"><span class="ct">Linhas de produto</span><span class="tg">vendas vs margem</span></div><div class="sl"><span><span class="ld2" style="background:var(--G)"></span>Vendas</span><span><span class="ld2" style="background:var(--Y);border-radius:50%"></span>Margem %</span></div><div class="cw sk" style="height:270px" id="wc4"><canvas id="c4"></canvas></div></div>
   </div>
-  <div class="grid-full">
-    <div class="card ac">
-      <div class="card-title">Mapa de Vendas</div>
-      <iframe class="qlik-frame chart-map" data-src="" id="obj-cAYHp"></iframe>
-    </div>
-  </div>
-
-</div><!-- /dashboard -->
-
-<!-- OUTRAS ABAS — iframes da aba completa -->
+</div>
 <div class="pg" id="p-mk">
-  <div class="card ac" style="height:80vh">
-    <iframe class="qlik-frame" data-src="" id="sheet-mk" style="height:100%"></iframe>
+  <div class="g2">
+    <div class="ca ac"><div class="ch"><span class="ct">Vendas por marketplace</span><span class="tg">R$M</span></div><div class="cw sk" style="height:310px" id="wcm1"><canvas id="cm1"></canvas></div></div>
+    <div class="ca"><div class="ch"><span class="ct">Margem por canal</span><span class="tg">%</span></div><div class="cw sk" style="height:310px" id="wcm2"><canvas id="cm2"></canvas></div></div>
   </div>
+  <div class="ca"><div class="ch"><span class="ct">Tabela completa</span><span class="tg">Marketplaces</span></div><table class="mk"><thead><tr><th>Canal</th><th>Vendas</th><th>V. Líquida</th><th>Margem</th><th>Devoluções</th><th>Dev%</th></tr></thead><tbody id="tb2"></tbody></table></div>
 </div>
 <div class="pg" id="p-pr">
-  <div class="card ac" style="height:80vh">
-    <iframe class="qlik-frame" data-src="" id="sheet-pr" style="height:100%"></iframe>
-  </div>
-</div>
-<div class="pg" id="p-lo">
-  <div class="card ac" style="height:80vh">
-    <iframe class="qlik-frame" data-src="" id="sheet-lo" style="height:100%"></iframe>
+  <div class="g2">
+    <div class="ca ac"><div class="ch"><span class="ct">Vendas por linha</span><span class="tg">R$M</span></div><div class="cw sk" style="height:310px" id="wcp1"><canvas id="cp1"></canvas></div></div>
+    <div class="ca"><div class="ch"><span class="ct">Margem por linha</span><span class="tg">%</span></div><div class="cw sk" style="height:310px" id="wcp2"><canvas id="cp2"></canvas></div></div>
   </div>
 </div>
 <div class="pg" id="p-re">
-  <div class="card ac" style="height:80vh">
-    <iframe class="qlik-frame" data-src="" id="sheet-re" style="height:100%"></iframe>
+  <div class="g2">
+    <div class="ca ac"><div class="ch"><span class="ct">Vendas por região</span><span class="tg">R$M</span></div><div class="cw sk" style="height:280px" id="wcr1"><canvas id="cr1"></canvas></div></div>
+    <div class="ca"><div class="ch"><span class="ct">Share de vendas</span><span class="tg">%</span></div><div class="cw sk" style="height:280px" id="wcr2"><canvas id="cr2"></canvas></div></div>
   </div>
 </div>
-<div class="pg" id="p-es">
-  <div class="ph"><div class="phi">&#128203;</div><h3>Estoque</h3><a href="https://itprime1.us.qlikcloud.com/sense/app/9e8c9ec2-fca4-4a81-bb27-10e2eae77cd8/sheet/0ae7299d-b4d6-4b89-88fa-29d9add1f25a/state/analysis" target="_blank">&#8599; Abrir no Qlik</a></div>
 </div>
-<div class="pg" id="p-pe">
-  <div class="ph"><div class="phi">&#128336;</div><h3>Pedidos Pendentes</h3><a href="https://itprime1.us.qlikcloud.com/sense/app/9e8c9ec2-fca4-4a81-bb27-10e2eae77cd8/sheet/77cdb22f-0073-49d2-9a6e-07507d0cd8f7/state/analysis" target="_blank">&#8599; Abrir no Qlik</a></div>
-</div>
-<div class="pg" id="p-qd">
-  <div class="card ac" style="height:80vh">
-    <iframe class="qlik-frame" data-src="" id="sheet-qd" style="height:100%"></iframe>
-  </div>
-</div>
-
-</div><!-- /wrap -->
 <footer><b>LOJAS GUAIBIM</b> · Vendas Digitais v2 · Do jeito que a Bahia gosta · Dados via Qlik Cloud</footer>
+<div id="tip"></div>
 
 <script>
-// Injeta URLs nos iframes do Dashboard
-document.getElementById('f-ano').dataset.src    = qurl('RpmPDgV');
-document.getElementById('f-mes').dataset.src    = qurl('jGNjwJr');
-document.getElementById('f-mk').dataset.src     = qurl('wFny');
-document.getElementById('f-linha').dataset.src  = qurl('MzeJn');
+// ═══ CONFIG ═══════════════════════════════════════════════════
+var HOST   = 'itprime1.us.qlikcloud.com';
+var APP_ID = '9e8c9ec2-fca4-4a81-bb27-10e2eae77cd8';
+var API_KEY= 'eyJhbGciOiJFUzM4NCIsImtpZCI6IjRiMzU5MDM5LTI0MTItNDZlNi05MTBlLTMyNTI0Y2IxYmYzMSIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyOmh0dHBzOi8vaWRlbnRpdHkucWxpay5jb20vU25jM05ESmxsNk5ubUplakpsSVVVQzc2OCIsImp0aSI6IkdTOFJBQ3g0UGxrX2NUWU9oVm1FR1Y1cmxGWl9Xb3lKLXZBa29wdFgzdjRqSHp0OFBSX1JaSDJFUnhRaW1yLXhZYk0yQkcyd29EY24zMnFUSmdvQU1XS1N2T3dZZ1d2Y21ZNWk3dmNNbVNtMnZRT1hkUmp2aF9IeDciLCJpYXQiOjE3NDQ1MzQ3OTgsImV4cCI6MTc3NjA3MDc5OCwiaXNzIjoicWxpa2Nsb3VkIn0.eyJhbGciOiJFUzM4NClsImtpZCI6IjRiMzU5MDM5LTI0MTItNDZlNi05MTBlLTMyNTI0Y2IxYmYzMSIsInR5cCI6IkpXVCJ9';
 
-document.getElementById('obj-CafYhC').dataset.src  = qurl('CafYhC');
-document.getElementById('obj-fJyTk').dataset.src   = qurl('fJyTk');
-document.getElementById('obj-GumJRHj').dataset.src = qurl('GumJRHj');
-document.getElementById('obj-bATEtJM').dataset.src = qurl('bATEtJM');
-document.getElementById('obj-Lzvxpm').dataset.src  = qurl('Lzvxpm');
-document.getElementById('obj-WmRKX').dataset.src   = qurl('WmRKX');
-document.getElementById('obj-cAYHp').dataset.src   = qurl('cAYHp');
+var FILTERS = {};
+var GRN='#2E8B1E',GRN2='#3DAA2A',GRN3='#236A16',YLW='#F5C800',BLU='#1A6FD4',DRK='#1A1A1A';
+var RCOLS=['#2E8B1E','#3DAA2A','#F5C800','#1A6FD4','#E07820','#888'];
+var GCOLS=['#2E8B1E','#3DAA2A','#50C040','#236A16','#68D050','#1E6014','#80E060','#2A7020','#4AB030'];
+var MKCOL={'NÃO DEFINI':'#888','SHOPEE':'#EE4D2D','MAGALU':'#0070C0','B2W':'#B00000','AMAZON':'#FF9900','MELI':'#3483FA','VIA VAREJO':'#8B0000','E-COMMERCE':'#2E8B1E'};
+var TIP=document.getElementById('tip');
 
-// Abas completas via /single/?sheet=
-document.getElementById('sheet-mk').dataset.src = sheetUrl('7dc6ad7d-aa7b-40da-9ad4-6dc793968d00');
-document.getElementById('sheet-pr').dataset.src = sheetUrl('b792cc2f-b02b-4fd2-b280-1880808ee603');
-document.getElementById('sheet-lo').dataset.src = sheetUrl('91fc2b3b-bbb7-4f0e-ab72-9534fc4bdb95');
-document.getElementById('sheet-re').dataset.src = sheetUrl('50db3f3b-f1fc-4d04-b610-ff80c1383c5e');
-document.getElementById('sheet-qd').dataset.src = sheetUrl('f8c1dd74-0610-430d-8e55-73215f2d11b8');
+// ═══ API REST ═══════════════════════════════════════════════════
+function apiQuery(dims, measures, limit, callback) {
+  var body = {
+    qInfo: {qType: 'mashup'},
+    qHyperCubeDef: {
+      qDimensions: dims.map(function(d){return{qDef:{qFieldDefs:[d]},qNullSuppression:true};}),
+      qMeasures:   measures.map(function(m){return{qDef:{qDef:m.expr,qLabel:m.label}};}),
+      qInitialDataFetch:[{qTop:0,qLeft:0,qHeight:limit||50,qWidth:dims.length+measures.length}],
+      qSortCriterias: dims.length > 0 ? [] : undefined
+    }
+  };
 
-// Carrega o dashboard imediatamente
-loadTab('db');
+  // Adiciona filtros activos como seleções
+  var selections = Object.keys(FILTERS).filter(function(k){return FILTERS[k];}).map(function(k){
+    return {qField:k, qValues:[{qText:FILTERS[k]}]};
+  });
 
-// Tabs
+  fetch('https://'+HOST+'/api/v1/apps/'+APP_ID+'/qix/hypercubes', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer '+API_KEY,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      qProp: body,
+      qSelections: selections.length > 0 ? selections : undefined
+    })
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var rows = [];
+    if(data && data.qHyperCube && data.qHyperCube.qDataPages && data.qHyperCube.qDataPages[0]) {
+      rows = data.qHyperCube.qDataPages[0].qMatrix || [];
+    }
+    callback(rows);
+  })
+  .catch(function(err){
+    console.error('API error:', err);
+    callback([]);
+  });
+}
+
+// ═══ CARREGA FILTROS (field values) ══════════════════════════════
+function loadFilterValues() {
+  [
+    {id:'f-ano',   field:'ANO'},
+    {id:'f-mk',    field:'Vendedor.MARKETPLACE'},
+    {id:'f-linha', field:'Produto.LINHA'},
+    {id:'f-regiao',field:'Estado.REGIAO'}
+  ].forEach(function(f){
+    fetch('https://'+HOST+'/api/v1/apps/'+APP_ID+'/qix/fields/'+encodeURIComponent(f.field)+'/values?limit=100', {
+      headers:{'Authorization':'Bearer '+API_KEY}
+    })
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var sel = document.getElementById(f.id);
+      var vals = (data.qListObject && data.qListObject.qDataPages && data.qListObject.qDataPages[0])
+        ? data.qListObject.qDataPages[0].qMatrix.map(function(r){return r[0].qText;}).sort()
+        : [];
+      vals.forEach(function(v){
+        var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);
+      });
+    })
+    .catch(function(){});
+  });
+}
+
+function applyFilter(field, selectEl) {
+  FILTERS[field] = selectEl.value;
+  setConn('ld','Atualizando...');
+  loadAll();
+}
+
+function clearFilters() {
+  FILTERS = {};
+  document.querySelectorAll('.fbs').forEach(function(s){s.value='';});
+  setConn('ld','Atualizando...');
+  loadAll();
+}
+
+function setConn(st, lb) {
+  var d=document.getElementById('cdot'),l=document.getElementById('clbl');
+  d.className='cd '+(st==='ok'?'ok':st==='er'?'er':'ld');
+  if(l)l.textContent=lb;
+}
+
+// ═══ CARREGA TODOS OS DADOS ═══════════════════════════════════════
+function loadAll() {
+  // KPIs
+  apiQuery([],[
+    {expr:'SUM(VENDA)',label:'Vendas'},
+    {expr:'SUM(VENDALIQUIDA)',label:'Liquida'},
+    {expr:'SUM(LUCRO)/SUM(VENDA)',label:'Margem'},
+    {expr:'SUM(DEVOLUCOES)',label:'Dev'},
+    {expr:'SUM(VENDA_MARG)/(SUM(QTDE)+SUM(QTDEVOL))',label:'Ticket'}
+  ],1,function(rows){
+    if(!rows||!rows[0])return;
+    var r=rows[0];
+    setKV(0,fM(r[0].qNum),'acumulado','bG');
+    setKV(1,fM(r[1].qNum),R(r[1].qNum/r[0].qNum*100,1)+'% das vendas','bN');
+    setKV(2,fP(r[2].qNum),'margem bruta','bY');
+    setKV(3,fM(r[3].qNum),'devoluções','bR');
+    setKV(4,'R$'+Math.round(r[4].qNum).toLocaleString('pt-BR'),'por unidade','bN');
+    setConn('ok','Dados ao vivo');
+  });
+
+  // Anual
+  apiQuery(['ANO'],[
+    {expr:'SUM(VENDA)',label:'Vendas'},
+    {expr:'SUM(VENDALIQUIDA)',label:'Liquida'},
+    {expr:'SUM(LUCRO)/SUM(VENDA)',label:'Margem'}
+  ],20,function(rows){
+    rows.sort(function(a,b){return a[0].qNum-b[0].qNum;});
+    raf(function(){
+      barV('wc1','c1',{
+        labels:rows.map(function(r){return r[0].qText;}),
+        bars:[{label:'Vendas',color:GRN,data:rows.map(function(r){return r[1].qNum;}),tip:fM},{label:'Líq.',color:BLU,data:rows.map(function(r){return r[2].qNum;}),tip:fM}],
+        line:{label:'Margem',color:YLW,data:rows.map(function(r){return r[3].qNum;}),tip:fP},
+        yFmt:fM,y2Min:.1,y2Max:.4,y2Fmt:fP
+      });
+    });
+  });
+
+  // Mensal
+  apiQuery(['MES'],[{expr:'SUM(VENDA)',label:'Vendas'}],12,function(rows){
+    rows.sort(function(a,b){return a[0].qNum-b[0].qNum;});
+    var MES=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    var vals=rows.map(function(r){return r[1].qNum;});
+    var mx=Math.max.apply(null,vals);
+    raf(function(){
+      barV('wc2','c2',{
+        labels:rows.map(function(r){var m=parseInt(r[0].qText,10);return MES[m-1]||r[0].qText;}),
+        bars:[{label:'Vendas',color:vals.map(function(v){return v>=mx*.9?GRN3:v>=mx*.75?GRN:GRN2+'99';}),data:vals,tip:fM}],
+        yFmt:fM
+      });
+    });
+  });
+
+  // Marketplaces
+  apiQuery(['Vendedor.MARKETPLACE'],[
+    {expr:'SUM(VENDA)',label:'V'},
+    {expr:'SUM(VENDALIQUIDA)',label:'L'},
+    {expr:'SUM(LUCRO)/SUM(VENDA)',label:'M'},
+    {expr:'SUM(DEVOLUCOES)',label:'D'}
+  ],10,function(rows){
+    rows.sort(function(a,b){return b[1].qNum-a[1].qNum;});
+    var top8=rows.slice(0,8);
+    mkTbl('tb0',top8,false);
+    if(isOn('p-mk')){
+      mkTbl('tb2',rows,true);
+      raf(function(){
+        var lb=top8.map(function(r){return r[0].qText;});
+        var cl=lb.map(function(n){return MKCOL[n]||GRN2;});
+        barH('wcm1','cm1',{labels:lb,bars:[{label:'Vendas',color:cl,data:top8.map(function(r){return r[1].qNum;}),tip:fM}],yFmt:fM});
+        barH('wcm2','cm2',{labels:lb,bars:[{label:'Margem',color:top8.map(function(r){return r[3].qNum>=.27?GRN:r[3].qNum>=.24?YLW:'#888';}),data:top8.map(function(r){return r[3].qNum;}),tip:fP}],yFmt:fP});
+      });
+    }
+  });
+
+  // Regiões
+  apiQuery(['Estado.REGIAO'],[{expr:'SUM(VENDA)',label:'V'}],10,function(rows){
+    rows=rows.filter(function(r){return r[0].qText&&r[0].qText.trim();});
+    rows.sort(function(a,b){return b[1].qNum-a[1].qNum;});
+    var tot=rows.reduce(function(s,r){return s+r[1].qNum;},0);
+    var lb=rows.map(function(r){return r[0].qText;});
+    var vals=rows.map(function(r){return r[1].qNum;});
+    var cl=RCOLS.slice(0,rows.length);
+    raf(function(){dnut('wc3','c3',{labels:lb,data:vals,colors:cl});});
+    regList('rl0',rows,tot,cl);
+    if(isOn('p-re')){raf(function(){
+      barH('wcr1','cr1',{labels:lb,bars:[{label:'Vendas',color:cl,data:vals,tip:fM}],yFmt:fM});
+      dnut('wcr2','cr2',{labels:lb,data:vals,colors:cl});
+    });}
+  });
+
+  // Linhas
+  apiQuery(['Produto.LINHA'],[
+    {expr:'SUM(VENDA)',label:'V'},
+    {expr:'SUM(LUCRO)/SUM(VENDA)',label:'M'}
+  ],15,function(rows){
+    rows.sort(function(a,b){return b[1].qNum-a[1].qNum;});
+    var top=rows.slice(0,9);
+    var lb=top.map(function(r){return r[0].qText.substring(0,14);});
+    var vals=top.map(function(r){return r[1].qNum;});
+    var margs=top.map(function(r){return r[2].qNum;});
+    raf(function(){
+      barV('wc4','c4',{labels:lb,bars:[{label:'Vendas',color:GCOLS,data:vals,tip:fM}],line:{label:'Margem',color:YLW,data:margs,tip:fP},yFmt:fM,y2Fmt:fP,xRot:38});
+    });
+    if(isOn('p-pr')){raf(function(){
+      barH('wcp1','cp1',{labels:lb,bars:[{label:'Vendas',color:GCOLS,data:vals,tip:fM}],yFmt:fM});
+      barH('wcp2','cp2',{labels:lb,bars:[{label:'Margem',color:margs.map(function(v){return v>=.4?GRN:v>=.25?YLW:'#888';}),data:margs,tip:fP}],yFmt:fP});
+    });}
+  });
+}
+
+// ═══ CHART ENGINE ════════════════════════════════════════════════
+var PI=Math.PI,TAU=2*PI;
+function raf(fn){requestAnimationFrame(function(){requestAnimationFrame(fn);});}
+function isOn(id){var el=document.getElementById(id);return el&&el.classList.contains('on');}
+function R(v,d){return(+v).toFixed(d===undefined?1:d);}
+function fM(v){v=+v;if(Math.abs(v)>=1e6)return'R$'+R(v/1e6)+'M';if(Math.abs(v)>=1e3)return'R$'+R(v/1e3)+'K';return'R$'+R(v,0);}
+function fP(v){return R((+v)*100,1)+'%';}
+function sf(ctx,w,sz){ctx.font=w+' '+sz+'px Montserrat,-apple-system,sans-serif';}
+function sT(e,l){TIP.style.display='block';TIP.innerHTML=l.join('<br>');var x=e.clientX+16,y=e.clientY-12;if(x+260>innerWidth)x=e.clientX-260;TIP.style.left=x+'px';TIP.style.top=y+'px';}
+function hT(){TIP.style.display='none';}
+function nX(a){var m=Math.max.apply(null,a.filter(isFinite));if(!m)return 10;var p=Math.pow(10,Math.floor(Math.log(m)/Math.LN10));return Math.ceil(m/p)*p*1.18;}
+function ls(a,b,n){var s=(b-a)/(n-1);return Array.from({length:n},function(_,i){return+(a+i*s).toFixed(4);});}
+
+function gc(cwId,cId){
+  var wrap=document.getElementById(cwId),el=document.getElementById(cId);
+  if(!wrap||!el)return null;
+  wrap.classList.remove('sk');
+  var r=wrap.getBoundingClientRect(),W=Math.round(r.width),H=Math.round(r.height);
+  if(!W||!H)return null;
+  var dpr=devicePixelRatio||1;
+  el.width=W*dpr;el.height=H*dpr;el.style.width=W+'px';el.style.height=H+'px';
+  var ctx=el.getContext('2d');ctx.scale(dpr,dpr);
+  return{ctx:ctx,W:W,H:H,el:el};
+}
+
+function barV(cwId,cId,cfg){
+  var c=gc(cwId,cId);if(!c)return;
+  var ctx=c.ctx,W=c.W,H=c.H,el=c.el,lb=cfg.labels,bs=cfg.bars,ln=cfg.line;
+  var ML=62,MR=ln?56:14,MT=12,MB=cfg.xRot?56:36,cW=W-ML-MR,cH=H-MT-MB;
+  var aB=bs.reduce(function(a,b){return a.concat(b.data);},[]);
+  var yN=0,yX=nX(aB),yT=ls(yN,yX,5);
+  var tY=function(v){return MT+cH-((v-yN)/(yX-yN))*cH;};
+  var tY2,y2T;
+  if(ln){var y2N=cfg.y2Min||0,y2X=cfg.y2Max||nX(ln.data);y2T=ls(y2N,y2X,5);tY2=function(v){return MT+cH-((v-y2N)/(y2X-y2N))*cH;};}
+  ctx.strokeStyle='rgba(0,0,0,.07)';ctx.lineWidth=.5;
+  yT.forEach(function(t){ctx.beginPath();ctx.moveTo(ML,tY(t));ctx.lineTo(ML+cW,tY(t));ctx.stroke();});
+  var yF=cfg.yFmt||function(v){return v;};
+  yT.forEach(function(t){ctx.save();sf(ctx,600,10);ctx.fillStyle='#888';ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(yF(t),ML-5,tY(t));ctx.restore();});
+  if(y2T){var y2F=cfg.y2Fmt||function(v){return v;};y2T.forEach(function(t){ctx.save();sf(ctx,600,10);ctx.fillStyle=ln.color;ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(y2F(t),ML+cW+MR-3,tY2(t));ctx.restore();});}
+  var n=lb.length,xS=cW/n;
+  lb.forEach(function(l,i){ctx.save();sf(ctx,600,10);ctx.fillStyle='#888';var x=ML+(i+.5)*xS,rot=cfg.xRot?-(cfg.xRot*PI/180):0;if(rot){ctx.translate(x,H-14);ctx.rotate(rot);ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(l,0,0);}else{ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText(l,x,H-12);}ctx.restore();});
+  var bC=bs.length,bP=xS*.1,gW=xS-bP*2,bW=gW/bC;
+  bs.forEach(function(ds,di){ds.data.forEach(function(v,i){if(!isFinite(v)||v<=0)return;var x=ML+bP+i*xS+di*bW,y=tY(v),h=tY(0)-y,r=5;ctx.save();ctx.fillStyle=Array.isArray(ds.color)?ds.color[i]:ds.color;ctx.beginPath();if(h>r*2){ctx.moveTo(x+r,y);ctx.lineTo(x+bW-r,y);ctx.arcTo(x+bW,y,x+bW,y+r,r);ctx.lineTo(x+bW,y+h);ctx.lineTo(x,y+h);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);}else ctx.rect(x,y,bW,h);ctx.closePath();ctx.fill();ctx.restore();});});
+  if(ln){var pts=ln.data.map(function(v,i){return{x:ML+(i+.5)*xS,y:tY2(v)};});ctx.save();ctx.strokeStyle=ln.color;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.beginPath();pts.forEach(function(p,i){if(!i)ctx.moveTo(p.x,p.y);else{var q=pts[i-1];ctx.bezierCurveTo(q.x+(p.x-q.x)*.4,q.y,p.x-(p.x-q.x)*.4,p.y,p.x,p.y);}});ctx.stroke();ctx.restore();pts.forEach(function(p){ctx.save();ctx.fillStyle='#fff';ctx.strokeStyle=ln.color;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(p.x,p.y,4.5,0,TAU);ctx.fill();ctx.stroke();ctx.restore();});}
+  el.onmousemove=function(e){var r=el.getBoundingClientRect(),mx=e.clientX-r.left,idx=Math.floor((mx-ML)/xS);if(idx<0||idx>=n){hT();return;}var lines=['<b>'+lb[idx]+'</b>'];bs.forEach(function(ds){lines.push(ds.label+': '+ds.tip(ds.data[idx]));});if(ln)lines.push(ln.label+': '+ln.tip(ln.data[idx]));sT(e,lines);};
+  el.onmouseleave=hT;
+}
+
+function barH(cwId,cId,cfg){
+  var c=gc(cwId,cId);if(!c)return;
+  var ctx=c.ctx,W=c.W,H=c.H,el=c.el,lb=cfg.labels,ds=cfg.bars[0];
+  var MT=4,MB=28,ML=116,MR=70,cW=W-ML-MR,cH=H-MT-MB;
+  var mx=nX(ds.data),xT=ls(0,mx,4);
+  ctx.strokeStyle='rgba(0,0,0,.07)';ctx.lineWidth=.5;
+  xT.forEach(function(t){var x=ML+(t/mx)*cW;ctx.beginPath();ctx.moveTo(x,MT);ctx.lineTo(x,MT+cH);ctx.stroke();});
+  var xF=cfg.yFmt||function(v){return v;};
+  xT.forEach(function(t){ctx.save();sf(ctx,600,10);ctx.fillStyle='#888';ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText(xF(t),ML+(t/mx)*cW,MT+cH+6);ctx.restore();});
+  var n=lb.length,bH=Math.min(cH/n-8,30),bP=(cH/n-bH)/2;
+  ds.data.forEach(function(v,i){var y=MT+i*(cH/n)+bP,w=mx>0?(v/mx)*cW:2,r=5;ctx.save();ctx.fillStyle=Array.isArray(ds.color)?ds.color[i]:ds.color;ctx.beginPath();if(w>r*2){ctx.moveTo(ML,y+r);ctx.arcTo(ML,y,ML+r,y,r);ctx.lineTo(ML+w-r,y);ctx.arcTo(ML+w,y,ML+w,y+r,r);ctx.lineTo(ML+w,y+bH-r);ctx.arcTo(ML+w,y+bH,ML+w-r,y+bH,r);ctx.lineTo(ML,y+bH);}else ctx.rect(ML,y,w,bH);ctx.closePath();ctx.fill();ctx.restore();ctx.save();sf(ctx,700,11);ctx.fillStyle=DRK;ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(lb[i],ML-7,y+bH/2);ctx.restore();ctx.save();sf(ctx,800,11);ctx.fillStyle=Array.isArray(ds.color)?ds.color[i]:ds.color;ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(ds.tip(v),ML+w+7,y+bH/2);ctx.restore();});
+  el.onmousemove=function(e){var r=el.getBoundingClientRect(),my=e.clientY-r.top,idx=Math.floor((my-MT)/(cH/n));if(idx<0||idx>=n){hT();return;}sT(e,['<b>'+lb[idx]+'</b>',ds.label+': '+ds.tip(ds.data[idx])]);};
+  el.onmouseleave=hT;
+}
+
+function dnut(cwId,cId,cfg){
+  var c=gc(cwId,cId);if(!c)return;
+  var ctx=c.ctx,W=c.W,H=c.H,el=c.el;
+  var cx=W/2,cy=H/2,Ro=Math.min(cx,cy)*.84,ri=Ro*.62;
+  var tot=cfg.data.reduce(function(a,b){return a+b;},0);
+  var ang=-PI/2,sl=cfg.data.map(function(v,i){var sw=tot>0?(v/tot)*TAU:0,s={s:ang,sw:sw,c:cfg.colors[i],v:v,l:cfg.labels[i]};ang+=sw;return s;});
+  sl.forEach(function(s){ctx.save();ctx.fillStyle=s.c;ctx.beginPath();ctx.arc(cx,cy,Ro,s.s,s.s+s.sw);ctx.arc(cx,cy,ri,s.s+s.sw,s.s,true);ctx.closePath();ctx.fill();ctx.restore();});
+  ctx.save();sf(ctx,900,17);ctx.fillStyle=DRK;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(fM(tot),cx,cy-5);ctx.restore();
+  ctx.save();sf(ctx,600,11);ctx.fillStyle='#888';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('total',cx,cy+11);ctx.restore();
+  el.onmousemove=function(e){var r=el.getBoundingClientRect(),dx=e.clientX-r.left-cx,dy=e.clientY-r.top-cy,d=Math.sqrt(dx*dx+dy*dy);if(d<ri||d>Ro){hT();return;}var a=Math.atan2(dy,dx);if(a<-PI/2)a+=TAU;var hit=null;sl.forEach(function(s){var sa=s.s,ea=s.s+s.sw;if(sa<-PI/2){sa+=TAU;ea+=TAU;}if(a>=sa&&a<=ea)hit=s;});if(hit)sT(e,['<b>'+hit.l+'</b>',fM(hit.v)+' — '+(tot>0?(hit.v/tot*100).toFixed(1):0)+'%']);else hT();};
+  el.onmouseleave=hT;
+}
+
+function setKV(i,val,badge,bcls){var el=document.getElementById('kv'+i),bl=document.getElementById('kb'+i);if(!el)return;el.classList.remove('sk');el.textContent=val;if(bl&&badge){bl.textContent=badge;bl.className='bd '+(bcls||'bN');}}
+
+function mkTbl(id,rows,full){
+  var tb=document.getElementById(id);if(!tb)return;tb.innerHTML='';
+  var mx=rows.length>0?rows[0][1].qNum:1;
+  rows.forEach(function(r,i){
+    var nm=r[0].qText,v=r[1].qNum,lq=r[2].qNum,m=r[3].qNum,d=r[4].qNum;
+    var c=MKCOL[nm]||GCOLS[i%GCOLS.length];
+    var cls=m>=.27?'pG':m>=.24?'pY':'pN';
+    var tr=document.createElement('tr');
+    if(full){var dp=v>0?R(d/v*100,1):'0';tr.innerHTML='<td><span class="mi" style="background:'+c+'">'+nm.slice(0,2)+'</span><b>'+nm+'</b></td><td>'+fM(v)+'</td><td>'+fM(lq)+'</td><td><span class="pt '+cls+'">'+fP(m)+'</span></td><td>'+fM(d)+'</td><td style="color:#B00;font-weight:700">'+dp+'%</td>';}
+    else{var bw=mx>0?Math.round((v/mx)*46):0;tr.innerHTML='<td><span class="mi" style="background:'+c+'">'+nm.slice(0,2)+'</span>'+nm+'</td><td>'+fM(v)+'<span style="display:inline-block;height:3px;width:'+bw+'px;background:rgba(46,139,30,.3);border-radius:2px;vertical-align:middle;margin-left:7px"></span></td><td><span class="pt '+cls+'">'+fP(m)+'</span></td><td style="color:#888">'+fM(d)+'</td>';}
+    tb.appendChild(tr);
+  });
+}
+
+function regList(id,rows,tot,colors){
+  var el=document.getElementById(id);if(!el)return;el.innerHTML='';
+  rows.forEach(function(r,i){
+    var pct=tot>0?(r[1].qNum/tot*100).toFixed(1):0;
+    var d=document.createElement('div');d.className='ri';
+    d.innerHTML='<span class="rn">'+r[0].qText+'</span><div class="rb"><div class="rbf" style="width:'+pct+'%;background:'+(colors[i]||GRN)+'"></div></div><span class="rv">'+fM(r[1].qNum)+'</span>';
+    el.appendChild(d);
+  });
+}
+
+// ═══ TABS ═══════════════════════════════════════════════════════
 document.querySelectorAll('.tab').forEach(function(t){
   t.addEventListener('click',function(){
     document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
     t.classList.add('on');
     document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});
-    var id = t.dataset.p;
-    document.getElementById('p-'+id).classList.add('on');
-    loadTab(id);
+    document.getElementById('p-'+t.dataset.p).classList.add('on');
+    raf(function(){loadAll();});
   });
 });
+
+// ═══ RESIZE ══════════════════════════════════════════════════════
+var rT;window.addEventListener('resize',function(){clearTimeout(rT);rT=setTimeout(loadAll,300);});
+
+// ═══ INIT ════════════════════════════════════════════════════════
+loadFilterValues();
+loadAll();
 </script>
 </body>
 </html>
