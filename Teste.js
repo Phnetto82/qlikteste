@@ -14,16 +14,14 @@ require.config({
              (config.port ? ":" + config.port : "") + config.prefix + "resources"
 });
  
-require(["js/qlik"], function(qlik) {
- 
-    qlik.on("error", function(error) {
-        document.getElementById('popupText').innerHTML += error.message + "<br>";
-        document.getElementById('popup').style.display = 'block';
-    });
- 
-    document.getElementById("closePopup").onclick = function() {
-        document.getElementById('popup').style.display = 'none';
-    };
+require( ["js/qlik"], function ( qlik ) {
+	qlik.on( "error", function ( error ) {
+		$( '#popupText' ).append( error.message + "<br>" );
+		$( '#popup' ).fadeIn( 1000 );
+	} );
+	$( "#closePopup" ).click( function () {
+		$( '#popup' ).hide();
+	} );
  
     var app = qlik.openApp('9e8c9ec2-fca4-4a81-bb27-10e2eae77cd8', config);
  
