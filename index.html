@@ -158,9 +158,9 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--Mut);border-top
 
 <script>
 // ═══ CONFIG ═══════════════════════════════════════════════════
-var HOST   = 'itprime1.us.qlikcloud.com';
+var HOST = window.location.hostname === 'phnetto82.github.io' ? window.location.host : window.location.host;
 var APP_ID = '9e8c9ec2-fca4-4a81-bb27-10e2eae77cd8';
-var API_KEY= 'eyJhbGciOiJFUzM4NCIsImtpZCI6ImNmOWU0NWRmLWMwZDUtNGUwNy05MjIyLTczY2UxODVkOTcxYiIsInR5cCI6IkpXVCJ9.eyJzdWJUeXBlIjoidXNlciIsInRlbmFudElkIjoiUkZzalI4NHprSnc3NDJtbDZObmJlejJlbElVUUM3NjgiLCJqdGkiOiJjZjllNDVkZi1jMGQ1LTRlMDctOTIyMi03M2NlMTg1ZDk3MWIiLCJhdWQiOiJxbGlrLmFwaSIsImlzcyI6InFsaWsuYXBpXC9hcGkta2V5cyIsInN1YiI6ImhnUGNVTEhSWnVqNEdPUWFmRmsxcm1tUEdXeDJzTjFaIn0.NslfQabd4JEF492B2nWbqhZeKgENXoyhrJWEeTHmNW1d_40MioqmSfuok7TYu-wp-m172smAnc94jNJSeRCasteGTRdNg5kwK2TlRmFUBYqweyoKGEstM8nbUy8Cvd_C';
+var API_KEY= ''; // API Key movido para o Worker (mais seguro)
 
 var FILTERS = {};
 var GRN='#2E8B1E',GRN2='#3DAA2A',GRN3='#236A16',YLW='#F5C800',BLU='#1A6FD4',DRK='#1A1A1A';
@@ -186,15 +186,13 @@ function apiQuery(dims, measures, limit, callback) {
     return {qField:k, qValues:[{qText:FILTERS[k]}]};
   });
 
-  fetch('https://'+HOST+'/api/v1/apps/'+APP_ID+'/qix/hypercubes', {
+  fetch('/.netlify/functions/qlik', {
     method: 'POST',
-    headers: {
-      'Authorization': 'Bearer '+API_KEY,
-      'Content-Type': 'application/json'
-    },
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      qProp: body,
-      qSelections: selections.length > 0 ? selections : undefined
+      path: '/api/v1/apps/'+APP_ID+'/qix/hypercubes',
+      method: 'POST',
+      body: {qProp: body, qSelections: selections.length > 0 ? selections : undefined}
     })
   })
   .then(function(r){return r.json();})
@@ -219,8 +217,14 @@ function loadFilterValues() {
     {id:'f-linha', field:'Produto.LINHA'},
     {id:'f-regiao',field:'Estado.REGIAO'}
   ].forEach(function(f){
-    fetch('https://'+HOST+'/api/v1/apps/'+APP_ID+'/qix/fields/'+encodeURIComponent(f.field)+'/values?limit=100', {
-      headers:{'Authorization':'Bearer '+API_KEY}
+    fetch('/.netlify/functions/qlik', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        path: '/api/v1/apps/'+APP_ID+'/qix/fields/'+encodeURIComponent(f.field)+'/values',
+        qs: '?limit=100',
+        method: 'GET'
+      })
     })
     .then(function(r){return r.json();})
     .then(function(data){
