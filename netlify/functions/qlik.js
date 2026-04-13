@@ -8,31 +8,49 @@ const CORS = {
 };
 
 exports.handler = async function(event) {
+  // Preflight CORS
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 204, headers: CORS, body: '' };
   }
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, headers: CORS, body: JSON.stringify({ error: 'Use POST' }) };
+
+  let qlikPath, qlikQs, qlikMethod, qlikBody;
+
+  if (event.httpMethod === 'POST') {
+    // POST: recebe { path, qs, method, body } no body
+    let req;
+    try { req = JSON.parse(event.body || '{}'); }
+    catch(e) { return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: 'Invalid JSON' }) }; }
+    qlikPath   = req.path  || '';
+    qlikQs     = req.qs    || '';
+    qlikMethod = req.method || 'POST';
+    qlikBody   = req.body  || undefined;
+
+  } else if (event.httpMethod === 'GET') {
+    // GET: path vem nos queryStringParameters
+    qlikPath   = event.queryStringParameters && event.queryStringParameters.path || '';
+    qlikQs     = event.queryStringParameters && event.queryStringParameters.qs   || '';
+    qlikMethod = 'GET';
+    qlikBody   = undefined;
+
+  } else {
+    return { statusCode: 405, headers: CORS, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  let req;
-  try {
-    req = JSON.parse(event.body || '{}');
-  } catch(e) {
-    return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: 'Invalid JSON body' }) };
+  if (!qlikPath) {
+    return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: 'Missing path' }) };
   }
 
-  const url = `https://${QLIK_HOST}${req.path}${req.qs || ''}`;
+  const url = `https://${QLIK_HOST}${qlikPath}${qlikQs}`;
 
   try {
     const resp = await fetch(url, {
-      method:  req.method || 'GET',
+      method:  qlikMethod,
       headers: {
         'Authorization': `Bearer ${API_KEY}`,
         'Content-Type':  'application/json',
         'Accept':        'application/json',
       },
-      body: req.body ? JSON.stringify(req.body) : undefined,
+      body: qlikBody ? JSON.stringify(qlikBody) : undefined,
     });
 
     const body = await resp.text();
