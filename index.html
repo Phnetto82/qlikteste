@@ -217,14 +217,9 @@ function loadFilterValues() {
     {id:'f-linha', field:'Produto.LINHA'},
     {id:'f-regiao',field:'Estado.REGIAO'}
   ].forEach(function(f){
-    fetch('/.netlify/functions/qlik', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        path: '/api/v1/apps/'+APP_ID+'/qix/fields/'+encodeURIComponent(f.field)+'/values',
-        qs: '?limit=100',
-        method: 'GET'
-      })
+    fetch('/.netlify/functions/qlik?path=/api/v1/apps/'+APP_ID+'/qix/fields/'+encodeURIComponent(f.field)+'/values&qs=?limit=100', {
+      method: 'GET',
+      headers: {}
     })
     .then(function(r){return r.json();})
     .then(function(data){
